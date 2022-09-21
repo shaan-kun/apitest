@@ -11,10 +11,16 @@ from .serializers import *
 
 class ShopProductsAPIView(ListAPIView):
     def get(self, request, pk):
-        print(pk)
-        products = Product.objects.filter(shop_id=pk).values()
+        try:
+            products = Product.objects.filter(shop_id=pk).values()
+            products = list(products)
 
-        return Response({'products': list(products)})
+            if len(products) == 0:
+                raise Exception
+
+            return Response({'products': products})
+        except Exception as e:
+            return Response({'error': 'Вы что-то нажали и всё сломалось!'})
 
 
 class ShopViewSet(viewsets.ModelViewSet):
