@@ -28,4 +28,5 @@ router.register(r'product', ProductViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
+    path('api/v1/shopproducts/<int:pk>/', ShopProductsAPIView.as_view()),
 ]

@@ -1,11 +1,20 @@
 from django.forms import model_to_dict
 from rest_framework import generics, viewsets
 from django.shortcuts import render
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import *
 from .serializers import *
+
+
+class ShopProductsAPIView(ListAPIView):
+    def get(self, request, pk):
+        print(pk)
+        products = Product.objects.filter(shop_id=pk).values()
+
+        return Response({'products': list(products)})
 
 
 class ShopViewSet(viewsets.ModelViewSet):
