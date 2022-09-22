@@ -1,0 +1,3 @@
+.idea/
+venv/
+drfsite/db.sqlite3
